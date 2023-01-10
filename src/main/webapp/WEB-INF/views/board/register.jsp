@@ -22,6 +22,22 @@
   <div class="panel panel-default">
     <div class="panel-heading">Board</div>
     <div class="panel-body">
+    	<form action="${contextPath}/board/register" method="post">
+    		<div class="form-group">
+    			<label>제목</label>
+    			<input type="text" name="title" class="form-control" />
+    		</div>
+    		<div class="form-group">
+    			<label>내용</label>
+    			<textarea rows="10" name="content" class="form-control"></textarea>
+    		</div>
+    		<div class="form-group">
+    			<label>작성자</label>
+    			<input type="text" name="writer" class="form-control" />
+    		</div>
+    		<button type="submit" class="btn btn-sm btn-default">등록</button>
+    		<button type="reset" class="btn btn-sm btn-default">취소</button>
+    	</form>
     	
     </div>
     <div class="panel-footer">레거시 답변형 게시판 (샘플)</div>

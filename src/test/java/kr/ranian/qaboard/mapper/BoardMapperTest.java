@@ -22,6 +22,18 @@ public class BoardMapperTest {
 	BoardMapper boardMapper;
 	
 	@Test
+	public void testInsert() throws Exception {
+		Board board = new Board();
+		board.setMemID("test01");
+		board.setTitle("새로 작성한 글");
+		board.setContent("새로 작성한 글");
+		board.setWriter("관리자");
+		boardMapper.insert(board);
+		
+		log.info(board);
+	}
+	
+	@Test
 	public void testGetList() {
 		List<Board> list = boardMapper.getList();
 		for (Board board : list) {

@@ -5,5 +5,13 @@
 	<select id="getList" resultType="kr.ranian.qaboard.entity.Board">
 		select * from tblBoard order by boardGroup desc
 	</select>
+	
+	<insert id="insert" parameterType="kr.ranian.qaboard.entity.Board">
+		insert into tblBoard(idx, memID, title, content, writer, boardGroup, boardSequence, boardLevel, boardAvailable)
+		select 
+			IFNULL(MAX(idx)+1, 1), #{memID}, #{title}, #{content}, #{writer},
+			IFNULL(MAX(boardGroup)+1, 0), 0, 0, 1
+		from tblBoard
+	</insert>
 
 </mapper>

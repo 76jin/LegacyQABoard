@@ -10,5 +10,6 @@ import kr.ranian.qaboard.entity.Board;
 public interface BoardMapper {	// @, XML
 	
 	public List<Board> getList();
+	public void insert(Board board);
 
 }
