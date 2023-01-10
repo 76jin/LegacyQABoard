@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ranian.qaboard.entity.Board;
+import kr.ranian.qaboard.entity.Member;
 import kr.ranian.qaboard.mapper.BoardMapper;
 
 @Service
@@ -18,6 +19,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> getList() {
 		List<Board> list = boardMapper.getList();
 		return list;
+	}
+
+	@Override
+	public Member login(Member member) {
+		Member loginMember = boardMapper.login(member);
+		return loginMember;
 	}
 
 }

@@ -13,5 +13,25 @@
 			IFNULL(MAX(boardGroup)+1, 0), 0, 0, 1
 		from tblBoard
 	</insert>
+	
+	<insert id="insertSelectKey" parameterType="kr.ranian.qaboard.entity.Board">
+		<selectKey keyProperty="idx,boardGroup" resultType="kr.ranian.qaboard.entity.Board" order="BEFORE">
+			select IFNULL(MAX(idx)+1, 1) as idx,
+					IFNULL(MAX(boardGroup)+1, 0) as boardGroup
+			from tblBoard
+		</selectKey>
+		
+		insert into tblBoard(idx, memID, title, content, writer, boardGroup, boardSequence, boardLevel, boardAvailable)
+		values (#{idx}, #{memID}, #{title}, #{content}, #{writer}, #{boardGroup}, 0, 0, 1)
+	</insert>
+	
+	
+	<select id="login" resultType="kr.ranian.qaboard.entity.Member" 
+					   parameterType="kr.ranian.qaboard.entity.Member">
+		select *
+		from tblMember
+		where memId = #{memID}
+			and memPwd = #{memPwd}
+	</select>
 
 </mapper>
