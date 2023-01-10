@@ -20,11 +20,31 @@
 <div class="container">
   <h2>게시판 목록</h2>
   <div class="panel panel-default">
-    <div class="panel-heading">제목</div>
+    <div class="panel-heading">Board</div>
     <div class="panel-body">
+    	<table class="table table-bordered table-hover" aria-label="board list" >
+    		<thead>
+    			<tr>
+    				<th>번호</th>
+    				<th>제목</th>
+    				<th>작성자</th>
+    				<th>작성일</th>
+    				<th>조회수</th>
+    			</tr>
+    		</thead>
+    		<c:forEach var="board" items="${list}">
+		    	<tr>
+    				<td>${board.idx}</td>
+    				<td>${board.title}</td>
+    				<td>${board.writer}</td>
+    				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.indate}" /></td>
+    				<td>${board.count}</td>
+    			</tr>
+    		</c:forEach>
+    	</table>
     	
     </div>
-    <div class="panel-footer"레거시 답변형 게시판 (샘플)</div>
+    <div class="panel-footer">레거시 답변형 게시판 (샘플)</div>
   </div>
 </div>
 
