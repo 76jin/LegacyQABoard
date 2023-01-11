@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.ranian.qaboard.entity.Board;
@@ -41,6 +42,26 @@ public class BoardController {
 		
 		rttr.addFlashAttribute("result", board.getIdx());
 		
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/get")
+	public String get(@RequestParam("idx") int idx, Model model) {
+		Board board = boardService.get(idx);
+		model.addAttribute("board", board);
+		return "board/get";
+	}
+	
+	@GetMapping("/modify")
+	public String modify(@RequestParam("idx") int idx, Model model) {
+		Board board = boardService.get(idx);
+		model.addAttribute("board", board);
+		return "board/modify";
+	}
+	
+	@PostMapping("/modify")
+	public String modify(Board board) {
+		boardService.modify(board);
 		return "redirect:/board/list";
 	}
 

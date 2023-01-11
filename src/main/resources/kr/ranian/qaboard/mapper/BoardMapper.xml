@@ -33,5 +33,20 @@
 		where memId = #{memID}
 			and memPwd = #{memPwd}
 	</select>
+	
+	<select id="read" resultType="kr.ranian.qaboard.entity.Board">
+		select * 
+		from tblBoard
+		where idx = #{idx}
+	</select>
+	
+	<update id="update" parameterType="kr.ranian.qaboard.entity.Board">
+		update tblBoard
+		set
+			title = #{title},
+			content = #{content}
+		where
+			idx = #{idx}
+	</update>
 
 </mapper>
