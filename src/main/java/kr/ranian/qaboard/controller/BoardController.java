@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.ranian.qaboard.entity.Board;
 import kr.ranian.qaboard.service.BoardService;
@@ -34,9 +35,11 @@ public class BoardController {
 	
 	// 한글 인코딩 주의
 	@PostMapping("/register")
-	public String register(Board board) {
+	public String register(Board board, RedirectAttributes rttr) {
 		
 		boardService.register(board);
+		
+		rttr.addFlashAttribute("result", board.getIdx());
 		
 		return "redirect:/board/list";
 	}
