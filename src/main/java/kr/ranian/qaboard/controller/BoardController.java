@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.ranian.qaboard.entity.Board;
@@ -29,6 +30,15 @@ public class BoardController {
 	@GetMapping("/register")
 	public String register(Model model) {
 		return "board/register";
+	}
+	
+	// 한글 인코딩 주의
+	@PostMapping("/register")
+	public String register(Board board) {
+		
+		boardService.register(board);
+		
+		return "redirect:/board/list";
 	}
 
 }
