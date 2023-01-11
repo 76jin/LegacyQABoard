@@ -38,4 +38,9 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 
+	@Override
+	public void modify(Board board) {
+		boardMapper.update(board);
+	}
+
 }

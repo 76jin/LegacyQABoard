@@ -22,14 +22,14 @@
   <div class="panel panel-default">
     <div class="panel-heading">Board</div>
     <div class="panel-body">
-    	<table class="table table-bordered">
+    	<table class="table table-bordered" aria-label="board">
     		<tr>
     			<td>번호</td>
-    			<td>${board.idx}</td>
+    			<td><input type="text" class="form-control" name="idx" value="${board.idx}" readonly="readonly" /></td>
     		</tr>
     		<tr>
     			<td>제목</td>
-    			<td>${board.title}</td>
+    			<td><input type="text" class="form-control" name="title" value="${board.title}" readonly="readonly" /></td>
     		</tr>
     		<tr>
     			<td>내용</td>
@@ -37,14 +37,13 @@
     		</tr>
     		<tr>
     			<td>작성자</td>
-    			<td>${board.writer}</td>
+    			<td><input type="text" class="form-control" name="idx" value="${board.writer}" readonly="readonly" /></td>
     		</tr>
     		<tr>
     			<td colspan="2" style="text-align: center;">
     				<button class="btn btn-sm btn-primary">답글</button>
-    				<button class="btn btn-sm btn-success">수정</button>
-    				<button class="btn btn-sm btn-warning">삭제</button>
-    				<button class="btn btn-sm btn-info">목록</button>
+    				<button class="btn btn-sm btn-success" onclick="location.href='${contextPath}/board/modify?idx=${board.idx}'">수정</button>
+    				<button class="btn btn-sm btn-info" onclick="location.href='${contextPath}/board/list'">목록</button>
     			</td>
     		</tr>
     	</table>

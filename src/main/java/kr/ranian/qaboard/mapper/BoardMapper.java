@@ -15,5 +15,6 @@ public interface BoardMapper {	// @, XML
 	public void insertSelectKey(Board board);
 	public Member login(Member member);
 	public Board read(int idx);
+	public void update(Board board);
 
 }

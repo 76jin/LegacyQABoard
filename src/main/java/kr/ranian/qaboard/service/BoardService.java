@@ -11,5 +11,6 @@ public interface BoardService {
 	public Member login(Member member);
 	public void register(Board board);
 	public Board get(int idx);
+	public void modify(Board board);
 
 }
