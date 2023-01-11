@@ -33,5 +33,11 @@
 		where memId = #{memID}
 			and memPwd = #{memPwd}
 	</select>
+	
+	<select id="read" resultType="kr.ranian.qaboard.entity.Board">
+		select * 
+		from tblBoard
+		where idx = #{idx}
+	</select>
 
 </mapper>

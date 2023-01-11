@@ -32,4 +32,10 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.insertSelectKey(board);
 	}
 
+	@Override
+	public Board get(int idx) {
+		Board board = boardMapper.read(idx);
+		return board;
+	}
+
 }
