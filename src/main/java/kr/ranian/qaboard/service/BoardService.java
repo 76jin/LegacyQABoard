@@ -12,5 +12,6 @@ public interface BoardService {
 	public void register(Board board);
 	public Board get(int idx);
 	public void modify(Board board);
+	public void remove(int idx);
 
 }

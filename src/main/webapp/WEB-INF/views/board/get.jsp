@@ -41,8 +41,15 @@
     		</tr>
     		<tr>
     			<td colspan="2" style="text-align: center;">
-    				<button class="btn btn-sm btn-primary">답글</button>
-    				<button class="btn btn-sm btn-success" onclick="location.href='${contextPath}/board/modify?idx=${board.idx}'">수정</button>
+    				<c:if test="${!empty member}">
+    					<button class="btn btn-sm btn-primary">답글</button>
+    					<button class="btn btn-sm btn-success" onclick="location.href='${contextPath}/board/modify?idx=${board.idx}'">수정</button>
+    				</c:if>
+    				<c:if test="${empty member}">
+    					<button class="btn btn-sm btn-primary" disabled="disabled">답글</button>
+    					<button class="btn btn-sm btn-success" disabled="disabled" 
+    							onclick="location.href='${contextPath}/board/modify?idx=${board.idx}'">수정</button>
+    				</c:if>
     				<button class="btn btn-sm btn-info" onclick="location.href='${contextPath}/board/list'">목록</button>
     			</td>
     		</tr>

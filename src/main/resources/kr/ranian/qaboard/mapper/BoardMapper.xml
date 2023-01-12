@@ -48,5 +48,11 @@
 		where
 			idx = #{idx}
 	</update>
+	
+	<delete id="delete">
+		delete 
+		from tblBoard
+		where idx = #{idx}
+	</delete>
 
 </mapper>

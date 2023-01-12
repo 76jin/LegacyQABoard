@@ -42,8 +42,14 @@
 	    		</tr>
 	    		<tr>
 	    			<td colspan="2" style="text-align: center;">
-	    				<button type="submit" class="btn btn-sm btn-primary">수정</button>
-	    				<button type="button" class="btn btn-sm btn-warning" onclick="location.href='${contextPath}/board/remove?idx=${board.idx}'">삭제</button>
+	    				<c:if test="${!empty member && member.memID eq board.memID}">
+		    				<button type="submit" class="btn btn-sm btn-primary">수정</button>
+		    				<button type="button" class="btn btn-sm btn-warning" onclick="location.href='${contextPath}/board/remove?idx=${board.idx}'">삭제</button>
+	    				</c:if>
+	    				<c:if test="${empty member || member.memID ne board.memID}">
+	    					<button disabled="disabled" type="submit" class="btn btn-sm btn-primary">수정</button>
+	    					<button disabled="disabled" type="button" class="btn btn-sm btn-warning" onclick="location.href='${contextPath}/board/remove?idx=${board.idx}'">삭제</button>
+	    				</c:if>
 	    				<button type="button" class="btn btn-sm btn-info" onclick="location.href='${contextPath}/board/list'">목록</button>
 	    			</td>
 	    		</tr>

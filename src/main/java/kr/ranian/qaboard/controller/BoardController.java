@@ -64,5 +64,11 @@ public class BoardController {
 		boardService.modify(board);
 		return "redirect:/board/list";
 	}
+	
+	@GetMapping("/remove")
+	public String remove(int idx) {
+		boardService.remove(idx);
+		return "redirect:/board/list";
+	}
 
 }
