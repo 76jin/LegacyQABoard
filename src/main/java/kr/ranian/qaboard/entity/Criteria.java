@@ -1,5 +1,8 @@
 package kr.ranian.qaboard.entity;
 
+import lombok.Data;
+
+@Data
 public class Criteria {
 	
 	private int page;		// 현재 페이지 번호 
