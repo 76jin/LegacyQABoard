@@ -64,10 +64,20 @@
 	    					</c:forEach>
 	    				</c:if>
 	    				<c:if test="${board.boardLevel > 0}">
-	    					<a href='${contextPath}/board/get?idx=${board.idx}'>[RE]${board.title}</a>
+	    					<c:if test="${board.boardAvailable eq 1}">
+	    						<a href='${contextPath}/board/get?idx=${board.idx}'>[RE]${board.title}</a>
+	    					</c:if>
+	    					<c:if test="${board.boardAvailable eq 0}">
+	    						<a href='javascript:showDeletedMsg()'>[RE]삭제된 게시물입니다.</a>
+	    					</c:if>
 	    				</c:if>
 	    				<c:if test="${board.boardLevel eq 0}">
-	    					<a href='${contextPath}/board/get?idx=${board.idx}'>${board.title}</a>
+	    					<c:if test="${board.boardAvailable eq 1}">
+	    						<a href='${contextPath}/board/get?idx=${board.idx}'>${board.title}</a>
+	    					</c:if>
+	    					<c:if test="${board.boardAvailable eq 0}">
+	    						<a href='javascript:showDeletedMsg()'>삭제된 게시물입니다.</a>
+	    					</c:if>
 	    				</c:if>
     				</td>
     				<td>${board.writer}</td>
@@ -132,6 +142,10 @@
 		}
 		
 		$("#resultModal").modal('show');
+	}
+	
+	function showDeletedMsg() {
+		alert("삭제된 게시물입니다.");
 	}
 </script>
 </body>

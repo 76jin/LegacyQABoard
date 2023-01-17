@@ -60,8 +60,9 @@
 	</update>
 	
 	<delete id="delete">
-		delete 
-		from tblBoard
+		update tblBoard
+		set
+			boardAvailable = 0
 		where idx = #{idx}
 	</delete>
 	
