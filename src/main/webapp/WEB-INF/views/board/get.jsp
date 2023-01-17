@@ -42,23 +42,45 @@
     		<tr>
     			<td colspan="2" style="text-align: center;">
     				<c:if test="${!empty member}">
-    					<button class="btn btn-sm btn-primary" onclick="location.href='${contextPath}/board/reply?idx=${board.idx}'">답글</button>
-    					<button class="btn btn-sm btn-success" onclick="location.href='${contextPath}/board/modify?idx=${board.idx}'">수정</button>
+    					<button class="btn btn-sm btn-primary" data-btn="reply">답글</button>
+    					<button class="btn btn-sm btn-success" data-btn="modify">수정</button>
     				</c:if>
     				<c:if test="${empty member}">
     					<button class="btn btn-sm btn-primary" disabled="disabled">답글</button>
     					<button class="btn btn-sm btn-success" disabled="disabled" 
     							onclick="location.href='${contextPath}/board/modify?idx=${board.idx}'">수정</button>
     				</c:if>
-    				<button class="btn btn-sm btn-info" onclick="location.href='${contextPath}/board/list'">목록</button>
+    				<button class="btn btn-sm btn-info" data-btn="list">목록</button>
     			</td>
     		</tr>
     	</table>
+    	
+    	<form id="boardForm" method="get">
+    		<input type="hidden" id="idx" name="idx" value ="${board.idx}" />
+    	</form>
     	
     </div>
     <div class="panel-footer">레거시 답변형 게시판 (샘플)</div>
   </div>
 </div>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("button").on('click', function(e) {
+			var formData = $("#boardForm");
+			var btn = $(this).data("btn");
+			if (btn === 'reply') {
+				formData.append('action', '${contextPath}/board/reply');
+			} else if (btn === 'modify') {
+				formData.append('action', '${contextPath}/board/modfy');
+			} else if (btn === 'list') {
+				formData.find('#idx').remove();
+				formData.append('action', '${contextPath}/board/list');
+			}
+			
+			formData.submit();
+		});
+	});
+</script>
 </body>
 </html>
