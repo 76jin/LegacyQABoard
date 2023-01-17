@@ -29,11 +29,11 @@
     		</tr>
     		<tr>
     			<td>제목</td>
-    			<td><input type="text" class="form-control" name="title" value="${board.title}" readonly="readonly" /></td>
+    			<td><input type="text" class="form-control" name="title" value="<c:out value='${board.title}' />" readonly="readonly" /></td>
     		</tr>
     		<tr>
     			<td>내용</td>
-    			<td><textarea rows="10" class="form-control" readonly="readonly">${board.content}</textarea></td>
+    			<td><textarea rows="10" class="form-control" readonly="readonly"><c:out value='${board.content}' /></textarea></td>
     		</tr>
     		<tr>
     			<td>작성자</td>

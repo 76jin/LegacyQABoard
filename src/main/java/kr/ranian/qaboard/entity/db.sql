@@ -68,6 +68,8 @@ select
     0, 0, 1
 from tblBoard;
 
+-- delete from tblBoard where idx in (4, 5, 6, 7, 9);
+
 select * from tblBoard;
 
 

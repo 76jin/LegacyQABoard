@@ -28,7 +28,7 @@
     		
     		<div class="form-group">
     			<label>제목</label>
-    			<input type="text" name="title" class="form-control" value="${board.title}" />
+    			<input type="text" name="title" class="form-control" value="<c:out value='${board.title}' />" />
     		</div>
     		<div class="form-group">
     			<label>답글</label>

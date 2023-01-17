@@ -65,7 +65,7 @@
 	    				</c:if>
 	    				<c:if test="${board.boardLevel > 0}">
 	    					<c:if test="${board.boardAvailable eq 1}">
-	    						<a href='${contextPath}/board/get?idx=${board.idx}'>[RE]${board.title}</a>
+	    						<a href='${contextPath}/board/get?idx=${board.idx}'><c:out value="[RE]${board.title}" /></a>
 	    					</c:if>
 	    					<c:if test="${board.boardAvailable eq 0}">
 	    						<a href='javascript:showDeletedMsg()'>[RE]삭제된 게시물입니다.</a>
@@ -73,7 +73,7 @@
 	    				</c:if>
 	    				<c:if test="${board.boardLevel eq 0}">
 	    					<c:if test="${board.boardAvailable eq 1}">
-	    						<a href='${contextPath}/board/get?idx=${board.idx}'>${board.title}</a>
+	    						<a href='${contextPath}/board/get?idx=${board.idx}'><c:out value="${board.title}" /></a>
 	    					</c:if>
 	    					<c:if test="${board.boardAvailable eq 0}">
 	    						<a href='javascript:showDeletedMsg()'>삭제된 게시물입니다.</a>
