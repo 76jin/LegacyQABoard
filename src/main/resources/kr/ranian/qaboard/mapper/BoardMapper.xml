@@ -3,7 +3,7 @@
 <mapper namespace="kr.ranian.qaboard.mapper.BoardMapper">
 
 	<select id="getList" resultType="kr.ranian.qaboard.entity.Board">
-		select * from tblBoard order by boardGroup desc
+		select * from tblBoard order by boardGroup desc, boardSequence asc
 	</select>
 	
 	<insert id="insert" parameterType="kr.ranian.qaboard.entity.Board">
@@ -23,6 +23,16 @@
 		
 		insert into tblBoard(idx, memID, title, content, writer, boardGroup, boardSequence, boardLevel, boardAvailable)
 		values (#{idx}, #{memID}, #{title}, #{content}, #{writer}, #{boardGroup}, 0, 0, 1)
+	</insert>
+	
+	<insert id="replyInsert" parameterType="kr.ranian.qaboard.entity.Board">
+		<selectKey keyProperty="idx" resultType="kr.ranian.qaboard.entity.Board" order="BEFORE">
+			select IFNULL(MAX(idx)+1, 1) as idx
+			from tblBoard
+		</selectKey>
+		
+		insert into tblBoard(idx, memID, title, content, writer, boardGroup, boardSequence, boardLevel, boardAvailable)
+		values (#{idx}, #{memID}, #{title}, #{content}, #{writer}, #{boardGroup}, #{boardSequence}, #{boardLevel}, 1)
 	</insert>
 	
 	
@@ -54,5 +64,14 @@
 		from tblBoard
 		where idx = #{idx}
 	</delete>
+	
+	<update id="replySeqUpdate" parameterType="kr.ranian.qaboard.entity.Board">
+		update tblBoard
+		set
+			boardSequence = boardSequence + 1
+		where
+			boardGroup = #{boardGroup}
+			and boardSequence > #{boardSequence}
+	</update>
 
 </mapper>
