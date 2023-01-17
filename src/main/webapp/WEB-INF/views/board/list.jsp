@@ -57,7 +57,19 @@
     		<c:forEach var="board" items="${list}">
 		    	<tr>
     				<td>${board.idx}</td>
-    				<td><a href='${contextPath}/board/get?idx=${board.idx}'>${board.title}</a></td>
+    				<td>
+	    				<c:if test="${board.boardLevel > 0}">
+	    					<c:forEach begin="1" end="${board.boardLevel}">
+	    						<span style="padding-left: 10px"></span>
+	    					</c:forEach>
+	    				</c:if>
+	    				<c:if test="${board.boardLevel > 0}">
+	    					<a href='${contextPath}/board/get?idx=${board.idx}'>[RE]${board.title}</a>
+	    				</c:if>
+	    				<c:if test="${board.boardLevel eq 0}">
+	    					<a href='${contextPath}/board/get?idx=${board.idx}'>${board.title}</a>
+	    				</c:if>
+    				</td>
     				<td>${board.writer}</td>
     				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.indate}" /></td>
     				<td>${board.count}</td>
