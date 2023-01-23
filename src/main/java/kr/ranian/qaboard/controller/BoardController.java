@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.ranian.qaboard.entity.Board;
+import kr.ranian.qaboard.entity.Criteria;
+import kr.ranian.qaboard.entity.PageMaker;
 import kr.ranian.qaboard.service.BoardService;
 
 @Controller
@@ -22,10 +24,18 @@ public class BoardController {
 	BoardService boardService;
 	
 	@GetMapping("/list")
-	public String getList(Model model) {
-		List<Board> list = boardService.getList();
+	public String getList(Criteria cri, Model model) {
+		List<Board> list = boardService.getList(cri);
 		
 		model.addAttribute("list", list);
+		
+		// 페이징 처리 로직
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.totalCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
 		return "board/list";
 	}
 	

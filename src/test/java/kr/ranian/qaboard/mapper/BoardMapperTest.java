@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ranian.qaboard.entity.Board;
+import kr.ranian.qaboard.entity.Criteria;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -47,7 +48,11 @@ public class BoardMapperTest {
 	
 	@Test
 	public void testGetList() {
-		List<Board> list = boardMapper.getList();
+		Criteria cri = new Criteria();
+		cri.setPage(1);
+		cri.setPerPageNum(10);
+		
+		List<Board> list = boardMapper.getList(cri);
 		for (Board board : list) {
 			log.info(board);
 		}

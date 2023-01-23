@@ -94,6 +94,38 @@
     		</c:if>
     	</table>
     	
+    	<!-- 페이징 Start -->
+    	<div style="text-align: center;">
+    		<ul class="pagination">
+    		
+    			<!-- 이전 버튼 -->
+    			<c:if test="${pageMaker.prev}">
+    			<li class="paginate_button previous">
+    				<a href="${contextPath}/board/list?page=${pageMaker.startPage - 1}">이전</a>
+    			</li>
+    			</c:if>
+    	
+    			<!-- 페이징 번호 처리 -->
+    			<c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+    				<c:if test="${pageMaker.cri.page != pageNum}">
+    					<li><a href="${contextPath}/board/list/?page=${pageNum}">${pageNum}</a></li>
+    				</c:if>
+				    	<c:if test="${pageMaker.cri.page == pageNum}">
+						<li class="active"><a href="${contextPath}/board/list/?page=${pageNum}">${pageNum}</a></li>
+					</c:if>
+				</c:forEach>
+    	
+    			<!-- 다음 버튼 -->
+    			<c:if test="${pageMaker.next}">
+    			<li class="paginate_button next">
+    				<a href="${contextPath}/board/list?page=${pageMaker.endPage + 1}">다음</a>
+    			</li>
+    			</c:if>
+    	
+    		</ul>
+    	</div>
+    	<!-- 페이징 End -->
+    	
     	<!--  result Modal -->
 		<div id="resultModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">

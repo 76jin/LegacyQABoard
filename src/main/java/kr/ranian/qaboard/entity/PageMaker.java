@@ -12,7 +12,7 @@ public class PageMaker {
 	private int endPage;		// 끝 페이지번호 (끝이 28일 경우 조정 필요) 
 	private boolean prev;		// 이전버튼 여부 
 	private boolean next;		// 다음버튼 여부 
-	private int displayPageNum = 10;	// 하단에 몇 개씩 페이지를 보여줄 것인가
+	private int displayPageNum = 3;	// 하단에 몇 개씩 페이지를 보여줄 것인가
 	
 	// 총 게시물의 수를 구하는 메서드
 	public void setTotalCount(int totalCount) {

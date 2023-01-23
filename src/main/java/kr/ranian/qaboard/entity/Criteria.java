@@ -10,7 +10,7 @@ public class Criteria {
 	
 	public Criteria() {
 		this.page = 1;
-		this.perPageNum = 10;	// 기본값 
+		this.perPageNum = 5;	// 기본값 
 	}
 	
 	// 현재 페이지 게시글의 시작 페이지번호 
