@@ -22,7 +22,10 @@
   <div class="panel panel-default">
     <div class="panel-heading">Board</div>
     <div class="panel-body">
-    	<form action="${contextPath}/board/modify" method="post">
+    	<form id="boardModify" action="${contextPath}/board/modify" method="post">
+ 	    	<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
+    		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
+    		
 	    	<table class="table table-bordered" aria-label="board">
 	    		<tr>
 	    			<td>번호</td>
@@ -43,22 +46,48 @@
 	    		<tr>
 	    			<td colspan="2" style="text-align: center;">
 	    				<c:if test="${!empty member && member.memID eq board.memID}">
-		    				<button type="submit" class="btn btn-sm btn-primary">수정</button>
-		    				<button type="button" class="btn btn-sm btn-warning" onclick="location.href='${contextPath}/board/remove?idx=${board.idx}'">삭제</button>
+		    				<button type="button" class="btn btn-sm btn-primary" data-btn="modify">수정</button>
+		    				<button type="button" class="btn btn-sm btn-warning" data-btn="remove">삭제</button>
 	    				</c:if>
 	    				<c:if test="${empty member || member.memID ne board.memID}">
-	    					<button disabled="disabled" type="submit" class="btn btn-sm btn-primary">수정</button>
-	    					<button disabled="disabled" type="button" class="btn btn-sm btn-warning" onclick="location.href='${contextPath}/board/remove?idx=${board.idx}'">삭제</button>
+	    					<button disabled="disabled" type="button" class="btn btn-sm btn-primary" data-btn="modify">수정</button>
+	    					<button disabled="disabled" type="button" class="btn btn-sm btn-warning" data-btn="remove">삭제</button>
 	    				</c:if>
-	    				<button type="button" class="btn btn-sm btn-info" onclick="location.href='${contextPath}/board/list'">목록</button>
+	    				<button type="button" class="btn btn-sm btn-info" data-btn="list">목록</button>
 	    			</td>
 	    		</tr>
 	    	</table>
+    	</form>
+	    	
+    	<form id="boardForm" method="get">
+	   		<input type="hidden" id="idx" name="idx" value ="<c:out value='${board.idx}' />" />
+	   		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
+	   		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
     	</form>
     </div>
     <div class="panel-footer">레거시 답변형 게시판 (샘플)</div>
   </div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("button").on('click', function(e) {
+			var boardForm = $("#boardForm");
+			var btn = $(this).data("btn");
+			if (btn === 'modify') {
+				$("#boardModify").submit();
+				return;
+			} else if (btn === 'remove') {
+				boardForm.attr('action', '${contextPath}/board/remove');
+			} else if (btn === 'list') {
+				boardForm.find('#idx').remove();
+				boardForm.attr('action', '${contextPath}/board/list');
+			}
+			
+			boardForm.submit();
+		});
+	});
+</script>
 
 </body>
 </html>

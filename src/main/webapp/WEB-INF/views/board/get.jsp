@@ -74,7 +74,7 @@
 			if (btn === 'reply') {
 				formData.attr('action', '${contextPath}/board/reply');
 			} else if (btn === 'modify') {
-				formData.attr('action', '${contextPath}/board/modfy');
+				formData.attr('action', '${contextPath}/board/modify');
 			} else if (btn === 'list') {
 				formData.find('#idx').remove();
 				formData.attr('action', '${contextPath}/board/list');
