@@ -101,30 +101,32 @@
     			<!-- 이전 버튼 -->
     			<c:if test="${pageMaker.prev}">
     			<li class="paginate_button previous">
-    				<a href="${contextPath}/board/list?page=${pageMaker.startPage - 1}">이전</a>
+    				<a href="${pageMaker.startPage - 1}">이전</a>
     			</li>
     			</c:if>
     	
     			<!-- 페이징 번호 처리 -->
     			<c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-    				<c:if test="${pageMaker.cri.page != pageNum}">
-    					<li><a href="${contextPath}/board/list/?page=${pageNum}">${pageNum}</a></li>
-    				</c:if>
-				    	<c:if test="${pageMaker.cri.page == pageNum}">
-						<li class="active"><a href="${contextPath}/board/list/?page=${pageNum}">${pageNum}</a></li>
-					</c:if>
+   					<li class="paginate_button ${pageMaker.cri.page == pageNum ? 'active' : ''}">
+   						<a href="${pageNum}">${pageNum}</a>
+   					</li>
 				</c:forEach>
     	
     			<!-- 다음 버튼 -->
     			<c:if test="${pageMaker.next}">
     			<li class="paginate_button next">
-    				<a href="${contextPath}/board/list?page=${pageMaker.endPage + 1}">다음</a>
+    				<a href="${pageMaker.endPage + 1}">다음</a>
     			</li>
     			</c:if>
     	
     		</ul>
     	</div>
     	<!-- 페이징 End -->
+    	
+    	<form id="pageForm" action="${contextPath}/board/list" method="get">
+    		<input type="hidden" id="page" name="page" value="${pageMaker.cri.page}" />
+    		<input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}" />
+    	</form>
     	
     	<!--  result Modal -->
 		<div id="resultModal" class="modal fade" role="dialog">
@@ -160,6 +162,15 @@
 		
 		$("#regBtn").click(function() {
 			location.href = "${contextPath}/board/register";
+		});
+		
+		// 페이지번호 클릭 시 이동하기
+		var pageForm = $("#pageForm");
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();	// a 태그 기능 막기 
+			var page = $(this).attr("href");	// 페이지 번호 
+			pageForm.find("#page").val(page);
+			pageForm.submit();
 		});
 		
 	});
