@@ -56,7 +56,9 @@
     	</table>
     	
     	<form id="boardForm" method="get">
-    		<input type="hidden" id="idx" name="idx" value ="${board.idx}" />
+    		<input type="hidden" id="idx" name="idx" value ="<c:out value='${board.idx}' />" />
+    		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
+    		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
     	</form>
     	
     </div>
@@ -70,12 +72,12 @@
 			var formData = $("#boardForm");
 			var btn = $(this).data("btn");
 			if (btn === 'reply') {
-				formData.append('action', '${contextPath}/board/reply');
+				formData.attr('action', '${contextPath}/board/reply');
 			} else if (btn === 'modify') {
-				formData.append('action', '${contextPath}/board/modfy');
+				formData.attr('action', '${contextPath}/board/modfy');
 			} else if (btn === 'list') {
 				formData.find('#idx').remove();
-				formData.append('action', '${contextPath}/board/list');
+				formData.attr('action', '${contextPath}/board/list');
 			}
 			
 			formData.submit();

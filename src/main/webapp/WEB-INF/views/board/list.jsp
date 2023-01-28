@@ -65,7 +65,7 @@
 	    				</c:if>
 	    				<c:if test="${board.boardLevel > 0}">
 	    					<c:if test="${board.boardAvailable eq 1}">
-	    						<a href='${contextPath}/board/get?idx=${board.idx}'><c:out value="[RE]${board.title}" /></a>
+	    						<a class="detail" href='${board.idx}'><c:out value="[RE]${board.title}" /></a>
 	    					</c:if>
 	    					<c:if test="${board.boardAvailable eq 0}">
 	    						<a href='javascript:showDeletedMsg()'>[RE]삭제된 게시물입니다.</a>
@@ -73,7 +73,7 @@
 	    				</c:if>
 	    				<c:if test="${board.boardLevel eq 0}">
 	    					<c:if test="${board.boardAvailable eq 1}">
-	    						<a href='${contextPath}/board/get?idx=${board.idx}'><c:out value="${board.title}" /></a>
+	    						<a class="detail" href='${board.idx}'><c:out value="${board.title}" /></a>
 	    					</c:if>
 	    					<c:if test="${board.boardAvailable eq 0}">
 	    						<a href='javascript:showDeletedMsg()'>삭제된 게시물입니다.</a>
@@ -124,6 +124,7 @@
     	<!-- 페이징 End -->
     	
     	<form id="pageForm" action="${contextPath}/board/list" method="get">
+    		<!-- 게시물 번호(idx) 추가 -->
     		<input type="hidden" id="page" name="page" value="${pageMaker.cri.page}" />
     		<input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}" />
     	</form>
@@ -170,6 +171,15 @@
 			e.preventDefault();	// a 태그 기능 막기 
 			var page = $(this).attr("href");	// 페이지 번호 
 			pageForm.find("#page").val(page);
+			pageForm.submit();
+		});
+		
+		$(".detail").on('click', function(e) {
+			e.preventDefault();	// a 태그 기능 막기
+			var idx = $(this).attr("href");	// 페이지 Id
+			var idxHidden = '<input type="hidden" name="idx" value="' + idx + '" />';
+			pageForm.append(idxHidden);
+			pageForm.attr('action', '${contextPath}/board/get');
 			pageForm.submit();
 		});
 		
