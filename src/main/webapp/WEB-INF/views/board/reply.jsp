@@ -22,7 +22,11 @@
   <div class="panel panel-default">
     <div class="panel-heading">Board</div>
     <div class="panel-body">
-    	<form action="${contextPath}/board/reply" method="post">
+    	<form id="replyForm" method="post">
+    		<!-- 페이지 정보 -->
+    		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
+    		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
+    		
     		<input type="hidden" name="idx" value="${board.idx}" />
     		<input type="hidden" name="memID" value="${member.memID}" />
     		
@@ -38,10 +42,14 @@
     			<label>작성자</label>
     			<input type="text" name="writer" class="form-control" value="${member.memName}" readonly="readonly" />
     		</div>
-    		<button type="submit" class="btn btn-sm btn-default">답글</button>
-    		<button type="reset" class="btn btn-sm btn-default">취소</button>
-    		<button type="reset" class="btn btn-sm btn-default" 
-    				onclick="location.href='${contextPath}/board/list'">목록</button>
+    		<button type="button" class="btn btn-sm btn-default" data-btn="reply">답글</button>
+    		<button type="button" class="btn btn-sm btn-default" data-btn="reset">취소</button>
+    		<button type="button" class="btn btn-sm btn-default" data-btn="list">목록</button>
+    	</form>
+    	
+	    <form id="listForm" method="get">
+    		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
+    		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
     	</form>
     	
     </div>
@@ -49,5 +57,26 @@
   </div>
 </div>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("button").on('click', function(e) {
+			var formData = $("#replyForm");
+			var btn = $(this).data("btn");
+			if (btn === 'reply') {
+				formData.attr('action', '${contextPath}/board/reply');
+			} else if (btn === 'reset') {
+				formData[0].reset();
+				return;
+			} else if (btn === 'list') {
+				var listForm = $("#listForm");
+				listForm.attr('action', '${contextPath}/board/list');
+				listForm.submit();
+				return;
+			}
+			
+			formData.submit();
+		});
+	});
+</script>
 </body>
 </html>

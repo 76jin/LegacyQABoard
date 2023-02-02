@@ -87,15 +87,17 @@ public class BoardController {
 	}
 	
 	@GetMapping("/reply")
-	public String reply(int idx, Model model) {
+	public String reply(int idx, Model model, @ModelAttribute("cri") Criteria cri) {
 		Board board = boardService.get(idx);
 		model.addAttribute("board", board);
 		return "board/reply";
 	}
 	
 	@PostMapping("/reply")
-	public String reply(Board board) {
+	public String reply(Board board, Criteria cri, RedirectAttributes rttr) {
 		boardService.replyProcess(board);
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		return "redirect:/board/list";
 	}
 
