@@ -94,6 +94,21 @@
     		</c:if>
     	</table>
     	
+    	<!-- 검색 메뉴 -->
+    	<form id="searchForm" class="form-inline" action="${contextPath}/board/list">
+    		<div class="form-group">
+    			<select class="form-control" name="type">
+    				<option value="writer">이름</option>
+    				<option value="title">제목</option>
+    				<option value="content">내용</option>
+    			</select>
+    		</div>
+    		<div class="form-group">
+    			<input type="text" class="form-control" name="keyword">
+    		</div>
+    		<button type="submit" class="btn btn-success">검색</button>
+    	</form>
+    	
     	<!-- 페이징 Start -->
     	<div style="text-align: center;">
     		<ul class="pagination">
