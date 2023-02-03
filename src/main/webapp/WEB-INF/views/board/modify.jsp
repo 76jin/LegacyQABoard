@@ -26,6 +26,10 @@
  	    	<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
     		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
     		
+ 		    <!-- 검색 정보 -->
+    		<input type="hidden" name="type" value="${cri.type}" />
+    		<input type="hidden" name="keyword" value="${cri.keyword}" />
+    		
 	    	<table class="table table-bordered" aria-label="board">
 	    		<tr>
 	    			<td>번호</td>
@@ -63,6 +67,10 @@
 	   		<input type="hidden" id="idx" name="idx" value ="<c:out value='${board.idx}' />" />
 	   		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
 	   		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
+	   		
+ 		    <!-- 검색 정보 -->
+    		<input type="hidden" name="type" value="${cri.type}" />
+    		<input type="hidden" name="keyword" value="${cri.keyword}" />
     	</form>
     </div>
     <div class="panel-footer">레거시 답변형 게시판 (샘플)</div>

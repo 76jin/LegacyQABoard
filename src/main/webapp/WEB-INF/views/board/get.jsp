@@ -59,6 +59,10 @@
     		<input type="hidden" id="idx" name="idx" value ="<c:out value='${board.idx}' />" />
     		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
     		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
+    		
+    		<!-- 검색 정보 -->
+    		<input type="hidden" name="type" value="${cri.type}" />
+    		<input type="hidden" name="keyword" value="${cri.keyword}" />
     	</form>
     	
     </div>

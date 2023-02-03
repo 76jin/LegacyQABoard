@@ -27,6 +27,10 @@
     		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
     		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
     		
+ 		    <!-- 검색 정보 -->
+    		<input type="hidden" name="type" value="${cri.type}" />
+    		<input type="hidden" name="keyword" value="${cri.keyword}" />
+    		
     		<input type="hidden" name="idx" value="${board.idx}" />
     		<input type="hidden" name="memID" value="${member.memID}" />
     		
@@ -50,6 +54,10 @@
 	    <form id="listForm" method="get">
     		<input type="hidden" name="page" value ="<c:out value='${cri.page}' />" />
     		<input type="hidden" name="perPageNum" value ="<c:out value='${cri.perPageNum}' />" />
+    		
+ 		    <!-- 검색 정보 -->
+    		<input type="hidden" name="type" value="${cri.type}" />
+    		<input type="hidden" name="keyword" value="${cri.keyword}" />
     	</form>
     	
     </div>
