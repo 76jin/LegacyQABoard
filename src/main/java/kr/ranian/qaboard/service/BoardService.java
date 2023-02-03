@@ -15,6 +15,6 @@ public interface BoardService {
 	public void modify(Board board);
 	public void remove(int idx);
 	public void replyProcess(Board board);
-	public int totalCount();
+	public int totalCount(Criteria cri);
 
 }

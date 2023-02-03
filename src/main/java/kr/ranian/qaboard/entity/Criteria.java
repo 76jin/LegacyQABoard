@@ -8,6 +8,10 @@ public class Criteria {
 	private int page;		// 현재 페이지 번호 
 	private int perPageNum;	// 한 페이지에 보여줄 개시글의 수
 	
+	// 검색 조건 
+	private String type;
+	private String keyword;
+	
 	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 5;	// 기본값 

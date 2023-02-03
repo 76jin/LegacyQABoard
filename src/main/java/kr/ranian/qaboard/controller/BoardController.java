@@ -24,7 +24,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@GetMapping("/list")
+	@RequestMapping("/list")
 	public String getList(Criteria cri, Model model) {
 		List<Board> list = boardService.getList(cri);
 		
@@ -33,7 +33,7 @@ public class BoardController {
 		// 페이징 처리 로직
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.totalCount());
+		pageMaker.setTotalCount(boardService.totalCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
