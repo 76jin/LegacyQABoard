@@ -140,10 +140,14 @@
     	</div>
     	<!-- 페이징 End -->
     	
-    	<form id="pageForm" action="${contextPath}/board/list" method="get">
+    	<form id="pageForm" action="${contextPath}/board/list" method="post">
     		<!-- 게시물 번호(idx) 추가 -->
     		<input type="hidden" id="page" name="page" value="${pageMaker.cri.page}" />
     		<input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}" />
+    		
+    		<!-- 검색 정보 -->
+    		<input type="hidden" name="type" value="${pageMaker.cri.type}" />
+    		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}" />
     	</form>
     	
     	<!--  result Modal -->
@@ -197,6 +201,7 @@
 			var idxHidden = '<input type="hidden" name="idx" value="' + idx + '" />';
 			pageForm.append(idxHidden);
 			pageForm.attr('action', '${contextPath}/board/get');
+			pageForm.attr('method', 'get');
 			pageForm.submit();
 		});
 		
