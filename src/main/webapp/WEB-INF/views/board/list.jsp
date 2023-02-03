@@ -98,13 +98,13 @@
     	<form id="searchForm" class="form-inline" action="${contextPath}/board/list">
     		<div class="form-group">
     			<select class="form-control" name="type">
-    				<option value="writer">이름</option>
-    				<option value="title">제목</option>
-    				<option value="content">내용</option>
+    				<option value="writer" ${pageMaker.cri.type == 'writer' ? 'selected' : ''}>이름</option>
+    				<option value="title" ${pageMaker.cri.type == 'title' ? 'selected' : ''}>제목</option>
+    				<option value="content" ${pageMaker.cri.type == 'content' ? 'selected' : ''}>내용</option>
     			</select>
     		</div>
     		<div class="form-group">
-    			<input type="text" class="form-control" name="keyword">
+    			<input type="text" class="form-control" name="keyword" value="${pageMaker.cri.keyword}">
     		</div>
     		<button type="submit" class="btn btn-success">검색</button>
     	</form>
