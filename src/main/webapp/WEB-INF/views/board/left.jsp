@@ -5,23 +5,32 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<div class="card" style="min-width: 500px; max-width: 1000px">
+<div class="card" style="min-width: 300px; max-width: 1000px">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<h4 class="card-title">GUEST</h4>
-				<p class="card-text">회원님 환영합니다!</p>
-				<form action="${contextPath}/login/loginProcess" method="post">
-				  <div class="form-group">
-				    <label for="memID">아이디:</label>
-				    <input type="text" class="form-control" name="memID">
-				  </div>
-				  <div class="form-group">
-				    <label for="memPwd">비밀번호:</label>
-				    <input type="password" class="form-control" name="memPwd">
-				  </div>
-				  <button type="submit" class="btn btn-default form-control">로그인</button>
-				</form>
+				<c:if test="${empty member}">
+					<h4 class="card-title">GUEST</h4>
+					<p class="card-text">회원님 환영합니다!</p>
+					<form action="${contextPath}/login/loginProcess" method="post">
+					  <div class="form-group">
+					    <label for="memID">아이디:</label>
+					    <input type="text" class="form-control" name="memID">
+					  </div>
+					  <div class="form-group">
+					    <label for="memPwd">비밀번호:</label>
+					    <input type="password" class="form-control" name="memPwd">
+					  </div>
+					  <button type="submit" class="btn btn-primary form-control">로그인</button>
+					</form>
+				</c:if>
+		    	<c:if test="${!empty member}">
+		    		<h4 class="card-title">${member.memName}</h4>
+		    		<p class="card-text">회원님 환영합니다.</p>
+					<form action="${contextPath}/login/logoutProcess" method="post">
+					  <button type="submit" class="btn btn-primary form-control">로그아웃</button>
+					</form>
+				</c:if>
 			</div>
 		</div>
 	</div>

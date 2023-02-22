@@ -6,96 +6,85 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body> 
+<body>
  
-<div class="container">
-  <h2>게시판 목록</h2>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-    	<c:if test="${empty member}">
-			<form class="form-inline" action="${contextPath}/login/loginProcess" method="post">
-			  <div class="form-group">
-			    <label for="memID">ID:</label>
-			    <input type="text" class="form-control" name="memID">
-			  </div>
-			  <div class="form-group">
-			    <label for="memPwd">Password:</label>
-			    <input type="password" class="form-control" name="memPwd">
-			  </div>
-			  <button type="submit" class="btn btn-default">로그인</button>
-			</form>
-		</c:if>
-    	<c:if test="${!empty member}">
-			<form class="form-inline" action="${contextPath}/login/logoutProcess" method="post">
-			  <div class="form-group">
-			    <label>${member.memName}님, 방문을 환영합니다.</label>
-			  </div>
-			  <button type="submit" class="btn btn-default">로그아웃</button>
-			</form>
-		</c:if>
-	</div>
-    <div class="panel-body">
-    	<table class="table table-bordered table-hover" aria-label="board list" >
-    		<thead>
-    			<tr>
-    				<th>번호</th>
-    				<th>제목</th>
-    				<th>작성자</th>
-    				<th>작성일</th>
-    				<th>조회수</th>
-    			</tr>
-    		</thead>
-    		<c:forEach var="board" items="${list}">
-		    	<tr>
-    				<td>${board.idx}</td>
-    				<td>
-	    				<c:if test="${board.boardLevel > 0}">
-	    					<c:forEach begin="1" end="${board.boardLevel}">
-	    						<span style="padding-left: 10px"></span>
-	    					</c:forEach>
-	    				</c:if>
-	    				<c:if test="${board.boardLevel > 0}">
-	    					<c:if test="${board.boardAvailable eq 1}">
-	    						<a class="detail" href='${board.idx}'><c:out value="[RE]${board.title}" /></a>
-	    					</c:if>
-	    					<c:if test="${board.boardAvailable eq 0}">
-	    						<a href='javascript:showDeletedMsg()'>[RE]삭제된 게시물입니다.</a>
-	    					</c:if>
-	    				</c:if>
-	    				<c:if test="${board.boardLevel eq 0}">
-	    					<c:if test="${board.boardAvailable eq 1}">
-	    						<a class="detail" href='${board.idx}'><c:out value="${board.title}" /></a>
-	    					</c:if>
-	    					<c:if test="${board.boardAvailable eq 0}">
-	    						<a href='javascript:showDeletedMsg()'>삭제된 게시물입니다.</a>
-	    					</c:if>
-	    				</c:if>
-    				</td>
-    				<td>${board.writer}</td>
-    				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.indate}" /></td>
-    				<td>${board.count}</td>
-    			</tr>
-    		</c:forEach>
-    		<c:if test="${!empty member}">
-	    		<tr>
-	    			<td colspan="5">
-	    				<button id="regBtn" class="btn btn-xs btn-primary pull-right">글쓰기</button>
-	    			</td>
-	    		</tr>
-    		</c:if>
-    	</table>
-    	
-    	<!-- 검색 메뉴 -->
-    	<div style="text-align: center;">
+<!-- <div class="container"> -->
+  <div class="card">
+    <div class="card-header">
+		<div class="jumbotron jumbotron-fluid">
+		  <div class="container">
+		    <h1>레거시 답변형 게시판</h1> 
+		    <p>Spring Boot, JPA, JSP, BS4</p> 
+		  </div>
+		</div>
+    </div>
+    <div class="card-body">
+		<div class="row">
+		  <div class="col-lg-2">
+		  	<jsp:include page="left.jsp" />
+		  </div>
+		  <div class="col-lg-7">
+		   	<table class="table table-hover" aria-label="board list" >
+		   		<thead>
+		   			<tr>
+		   				<th>번호</th>
+		   				<th>제목</th>
+		   				<th>작성자</th>
+		   				<th>작성일</th>
+		   				<th>조회수</th>
+		   			</tr>
+		   		</thead>
+		   		<c:forEach var="board" items="${list}">
+			    	<tr>
+		   				<td>${board.idx}</td>
+		   				<td>
+		    				<c:if test="${board.boardLevel > 0}">
+		    					<c:forEach begin="1" end="${board.boardLevel}">
+		    						<span style="padding-left: 10px"></span>
+		    					</c:forEach>
+		    				</c:if>
+		    				<c:if test="${board.boardLevel > 0}">
+		    					<c:if test="${board.boardAvailable eq 1}">
+		    						<a class="detail" href='${board.idx}'><c:out value="[RE]${board.title}" /></a>
+		    					</c:if>
+		    					<c:if test="${board.boardAvailable eq 0}">
+		    						<a href='javascript:showDeletedMsg()'>[RE]삭제된 게시물입니다.</a>
+		    					</c:if>
+		    				</c:if>
+		    				<c:if test="${board.boardLevel eq 0}">
+		    					<c:if test="${board.boardAvailable eq 1}">
+		    						<a class="detail" href='${board.idx}'><c:out value="${board.title}" /></a>
+		    					</c:if>
+		    					<c:if test="${board.boardAvailable eq 0}">
+		    						<a href='javascript:showDeletedMsg()'>삭제된 게시물입니다.</a>
+		    					</c:if>
+		    				</c:if>
+		   				</td>
+		   				<td>${board.writer}</td>
+		   				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.indate}" /></td>
+		   				<td>${board.count}</td>
+		   			</tr>
+		   		</c:forEach>
+		   		<c:if test="${!empty member}">
+		    		<tr>
+		    			<td colspan="5">
+		    				<button id="regBtn" class="btn btn-xs btn-primary pull-right">글쓰기</button>
+		    			</td>
+		    		</tr>
+		   		</c:if>
+		   	</table>
+		   	
+		   	<!-- 검색 메뉴 -->
 	    	<form id="searchForm" class="form-inline" action="${contextPath}/board/list">
 	    		<div class="form-group">
 	    			<select class="form-control" name="type">
@@ -109,72 +98,73 @@
 	    		</div>
 	    		<button type="submit" class="btn btn-success">검색</button>
 	    	</form>
-    	</div>
-    	
-    	<!-- 페이징 Start -->
-    	<div style="text-align: center;">
-    		<ul class="pagination">
-    		
-    			<!-- 이전 버튼 -->
-    			<c:if test="${pageMaker.prev}">
-    			<li class="paginate_button previous">
-    				<a href="${pageMaker.startPage - 1}">이전</a>
-    			</li>
-    			</c:if>
-    	
-    			<!-- 페이징 번호 처리 -->
-    			<c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-   					<li class="paginate_button ${pageMaker.cri.page == pageNum ? 'active' : ''}">
-   						<a href="${pageNum}">${pageNum}</a>
-   					</li>
+		   	
+		   	<!-- 페이징 Start -->
+	   		<ul class="pagination justify-content-center">
+	   		
+	   			<!-- 이전 버튼 -->
+	   			<c:if test="${pageMaker.prev}">
+	   			<li class="paginate_button page-item previous">
+	   				<a class="page-link" href="${pageMaker.startPage - 1}">이전</a>
+	   			</li>
+	   			</c:if>
+	   	
+	   			<!-- 페이징 번호 처리 -->
+	   			<c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+	  					<li class="paginate_button page-item ${pageMaker.cri.page == pageNum ? 'active' : ''}">
+	  						<a class="page-link" href="${pageNum}">${pageNum}</a>
+	  					</li>
 				</c:forEach>
-    	
-    			<!-- 다음 버튼 -->
-    			<c:if test="${pageMaker.next}">
-    			<li class="paginate_button next">
-    				<a href="${pageMaker.endPage + 1}">다음</a>
-    			</li>
-    			</c:if>
-    	
-    		</ul>
-    	</div>
-    	<!-- 페이징 End -->
-    	
-    	<form id="pageForm" action="${contextPath}/board/list" method="post">
-    		<!-- 게시물 번호(idx) 추가 -->
-    		<input type="hidden" id="page" name="page" value="${pageMaker.cri.page}" />
-    		<input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}" />
-    		
-    		<!-- 검색 정보 -->
-    		<input type="hidden" name="type" value="${pageMaker.cri.type}" />
-    		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}" />
-    	</form>
-    	
-    	<!--  result Modal -->
-		<div id="resultModal" class="modal fade" role="dialog">
-		  <div class="modal-dialog">
-		
-		    <!-- Modal content-->
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">등록 결과</h4>
-		      </div>
-		      <div class="modal-body"></div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-		      </div>
-		    </div>
-		
+	   	
+	   			<!-- 다음 버튼 -->
+	   			<c:if test="${pageMaker.next}">
+	   			<li class="paginate_button page-item next">
+	   				<a class="page-link" href="${pageMaker.endPage + 1}">다음</a>
+	   			</li>
+	   			</c:if>
+	   	
+	   		</ul>
+		   	<!-- 페이징 End -->
+		   	
+		   	<form id="pageForm" action="${contextPath}/board/list" method="post">
+		   		<!-- 게시물 번호(idx) 추가 -->
+		   		<input type="hidden" id="page" name="page" value="${pageMaker.cri.page}" />
+		   		<input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}" />
+		   		
+		   		<!-- 검색 정보 -->
+		   		<input type="hidden" name="type" value="${pageMaker.cri.type}" />
+		   		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}" />
+		   	</form>
+		   	
+		   	<!--  result Modal -->
+			<div id="resultModal" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">등록 결과</h4>
+			      </div>
+			      <div class="modal-body"></div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+		   	<!--  Modal End -->
+		  </div>
+		  <div class="col-lg-3">
+		  	<jsp:include page="right.jsp" />
 		  </div>
 		</div>
-    	<!--  Modal End -->
-    	
-    	
-    </div>
-    <div class="panel-footer">레거시 답변형 게시판 (샘플)</div>
+    </div> 
+    <div class="card-footer">레거시 답변형 게시판 (샘플)</div>
   </div>
-</div>
+<!-- </div> -->
+
 
 <script type="text/javascript">
 	$(document).ready(function() {

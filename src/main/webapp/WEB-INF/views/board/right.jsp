@@ -7,7 +7,7 @@
 
 <div class="card" style="min-width: 500px; max-width: 1000px">
 	<div class="card-body">
-		<p class="card-text">도서검색</p>
+		<h4 class="card-title">도서검색</h4>
 		<div class="input-group mb-3">
 			<input type="text" class="form-control" placeholder="Search" />
 			<div class="input-group-append">
