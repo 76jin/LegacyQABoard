@@ -12,6 +12,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="${contextPath}/resources/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -52,6 +54,7 @@
 		    					<c:forEach begin="1" end="${board.boardLevel}">
 		    						<span style="padding-left: 10px"></span>
 		    					</c:forEach>
+		    					<i class="bi bi-arrow-return-right"></i>
 		    				</c:if>
 		    				<c:if test="${board.boardLevel > 0}">
 		    					<c:if test="${board.boardAvailable eq 1}">
@@ -84,20 +87,24 @@
 		   		</c:if>
 		   	</table>
 		   	
-		   	<!-- 검색 메뉴 -->
-	    	<form id="searchForm" class="form-inline" action="${contextPath}/board/list">
-	    		<div class="form-group">
-	    			<select class="form-control" name="type">
-	    				<option value="writer" ${pageMaker.cri.type == 'writer' ? 'selected' : ''}>이름</option>
-	    				<option value="title" ${pageMaker.cri.type == 'title' ? 'selected' : ''}>제목</option>
-	    				<option value="content" ${pageMaker.cri.type == 'content' ? 'selected' : ''}>내용</option>
-	    			</select>
-	    		</div>
-	    		<div class="form-group">
-	    			<input type="text" class="form-control" name="keyword" value="${pageMaker.cri.keyword}">
-	    		</div>
-	    		<button type="submit" class="btn btn-success">검색</button>
-	    	</form>
+			<!-- 검색 메뉴 -->
+			<form id="searchForm" class="form-inline" action="${contextPath}/board/list">
+				<div class="container">
+					<div class="input-group mb-3">
+					  <div class="input-group-append">
+		    			<select class="form-control" name="type">
+		    				<option value="writer" ${pageMaker.cri.type == 'writer' ? 'selected' : ''}>이름</option>
+		    				<option value="title" ${pageMaker.cri.type == 'title' ? 'selected' : ''}>제목</option>
+		    				<option value="content" ${pageMaker.cri.type == 'content' ? 'selected' : ''}>내용</option>
+		    			</select>
+					  </div>
+					  <input type="text" class="form-control" name="keyword" value="${pageMaker.cri.keyword}">
+					  <div class="input-group-append">
+					    <button class="btn btn-success" type="submit">검색</button> 
+					  </div>
+					</div>
+				</div>
+			</form>
 		   	
 		   	<!-- 페이징 Start -->
 	   		<ul class="pagination justify-content-center">
