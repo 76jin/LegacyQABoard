@@ -5,7 +5,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<div class="card" style="min-width: 300px; max-width: 1000px">
+<div class="card" style="min-height: 500px; max-height: 1000px;">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

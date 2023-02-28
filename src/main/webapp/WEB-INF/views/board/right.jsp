@@ -5,7 +5,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<div class="card" style="min-width: 500px; max-width: 1000px">
+<div class="card" style="min-height: 500px; max-height: 1000px;">
 	<div class="card-body">
 		<h4 class="card-title">도서검색</h4>
 		<div class="input-group mb-3">
