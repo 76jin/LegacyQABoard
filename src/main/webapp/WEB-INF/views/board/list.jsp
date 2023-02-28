@@ -81,7 +81,7 @@
 		   		<c:if test="${!empty member}">
 		    		<tr>
 		    			<td colspan="5">
-		    				<button id="regBtn" class="btn btn-xs btn-primary pull-right">글쓰기</button>
+		    				<button id="regBtn" class="btn btn-xs btn-secondary pull-right">글쓰기</button>
 		    			</td>
 		    		</tr>
 		   		</c:if>
