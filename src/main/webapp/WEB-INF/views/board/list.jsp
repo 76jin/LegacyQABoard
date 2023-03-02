@@ -3,7 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<spring:eval var="apiKey" expression="@property['kakaoApiKey']" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -150,8 +152,8 @@
 			    <!-- Modal content-->
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			        <h4 class="modal-title">등록 결과</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			      </div>
 			      <div class="modal-body"></div>
 			      <div class="modal-footer">
@@ -202,6 +204,32 @@
 			pageForm.submit();
 		});
 		
+		// 도서 검색 버튼이 클릭되었을 때
+		$("#search").on('click', function() {
+			var bookName = $("#bookName").val();
+			if (bookName === "") {
+				alert("도서 제목을 입력하세요.");
+				return false;
+			}
+			
+			// 카카오 도서 검색 API 연동하기(Key 발급 필요)
+			// HTTP: https://dapi.kakao.com/v3/search/book?target=title
+			// Header: Authorization: KakaoAK ${REST_API_KEY}
+			$.ajax({
+				url: "https://dapi.kakao.com/v3/search/book?target=title",
+				headers: { "Authorization" : "KakaoAK " + '${apiKey}' },
+				type: "get",
+				data: { "query": bookName },
+				dataType: "json",
+				success: bookList,
+				error: function (e) {
+					alert('error!');
+					console.error(e);
+				}
+			});
+			
+		});
+		
 	});
 	
 	function checkModal(result) {
@@ -218,6 +246,33 @@
 	
 	function showDeletedMsg() {
 		alert("삭제된 게시물입니다.");
+	}
+	
+	function bookList(data) {
+		var bList = "<table class='table table-hover'>";
+		bList += "<thead>";
+		bList += "<tr>";
+		bList += "<th>책 이미지</th>";
+		bList += "<th>책 가격</th>";
+		bList += "</tr>";
+		bList += "</thead>";
+		
+		bList += "<tbody>";
+		
+		$.each(data.documents, function(index, book) {
+			var image = book.thumbnail;
+			var price = book.price;
+			var url = book.url;
+			bList += "<tr>";
+			bList += "<td><a href='" + url + "'><img src='" + image + "' width='50px' height='60px' /></a></td>";
+			bList += "<td>" + price + "</td>";
+			bList += "</tr>";
+		});
+		
+		bList += "</tbody>";
+		bList += "</table>";
+		
+		$("#bookList").html(bList);
 	}
 </script>
 </body>

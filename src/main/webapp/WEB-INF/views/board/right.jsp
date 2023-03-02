@@ -9,12 +9,18 @@
 	<div class="card-body">
 		<h4 class="card-title">도서검색</h4>
 		<div class="input-group mb-3">
-			<input type="text" class="form-control" placeholder="Search" />
+			<input type="text" class="form-control" id="bookName" placeholder="Search" />
 			<div class="input-group-append">
-				<button type="button" class="btn btn-secondary">Go</button>
+				<a type="button" class="btn btn-secondary" id="search">Go</a>
 			</div>
 		</div>
-		<div id="bookList">
+		<!-- Loading progress -->
+		<div class="loading-progress" style="display: none;">
+			<div class="spinner-border text-secondary" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+		<div id="bookList" style="overflow: scroll; height: 500px; padding: 10px;">
 			여기에 검색된 도서 목록을 출력합니다. 
 		</div>
 	</div>
