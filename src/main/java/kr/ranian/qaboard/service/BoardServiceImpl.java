@@ -36,7 +36,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board get(int idx) {
 		Board board = boardMapper.read(idx);
-		boardMapper.countUpdate(idx);
 		return board;
 	}
 
