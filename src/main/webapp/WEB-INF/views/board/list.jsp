@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="${contextPath}/resources/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -228,6 +229,29 @@
 				}
 			});
 			
+			$(document).ajaxStart(function() { $(".loading-progress").show(); });
+			$(document).ajaxStop(function() { $(".loading-progress").hide(); });
+			
+		});
+		
+		// input에 도서 제목 입력하면 자동 검색
+		$("#bookName").autocomplete({
+			source: function() { 
+				var bookName = $("#bookName").val();
+				$.ajax({
+					url: "https://dapi.kakao.com/v3/search/book?target=title",
+					headers: { "Authorization" : "KakaoAK " + '${apiKey}' },
+					type: "get",
+					data: { "query": bookName },
+					dataType: "json",
+					success: bookList,
+					error: function (e) {
+						alert('error!');
+						console.error(e);
+					}
+				});
+			},
+			minLength: 1
 		});
 		
 	});
