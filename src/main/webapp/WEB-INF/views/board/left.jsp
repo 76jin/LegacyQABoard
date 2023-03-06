@@ -39,7 +39,7 @@
 			<div class="card-body">
 				<p class="card-text">지도</p>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Search" />
+					<input type="text" id="address" class="form-control" placeholder="Search" />
 					<div class="input-group-append">
 						<button type="button" id="mapBtn" class="btn btn-secondary">Go</button>
 					</div>

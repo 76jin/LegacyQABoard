@@ -259,7 +259,24 @@
 		
 		// 지도 검색 시, 지도 표시 
 		$("#mapBtn").on('click', function() {
-			mapView();
+			var address = $("#address").val();
+			if (address === '') {
+				alert('주소를 입력하세요.');
+				return false;
+			}
+			
+			$.ajax({
+				url: "https://dapi.kakao.com/v2/local/search/address.json",
+				headers: { "Authorization" : "KakaoAK " + '${apiKey}' },
+				type: 'get',
+				data: { "query": address },
+				dataType: 'json',
+				success: mapView,
+				error: function(e) {
+					alert('error!');
+					console.log(e);
+				}
+			});
 		});
 		
 	});
@@ -307,18 +324,21 @@
 		$("#bookList").html(bList);
 	}
 	
-	function mapView() {
+	function mapView(data) {
+		var x = data.documents[0].x;		// 경도
+		var y = data.documents[0].y;		// 위도 
+		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
-	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
+	        center: new kakao.maps.LatLng(y, x), // 지도의 중심좌표
+	        level: 2 // 지도의 확대 레벨
 	    };
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		
 		// 마커가 표시될 위치입니다 
-		var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+		var markerPosition  = new kakao.maps.LatLng(y, x); 
 
 		// 마커를 생성합니다
 		var marker = new kakao.maps.Marker({
